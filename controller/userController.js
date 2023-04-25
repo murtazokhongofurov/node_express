@@ -34,6 +34,7 @@ const getUserById = async (req, res) => {
   }
 };
 
+
 // Method:       POST
 // Descrip:      add new user info
 const addUser = async (req, res) => {
@@ -54,8 +55,52 @@ const addUser = async (req, res) => {
   }
 };
 
+
+// Method:       PUT
+// Descrip:      Edit user info
+const updateUser = async (req, res) => {
+    try {
+      const { fullname, email, profile_photo } = req.body
+
+      const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+        fullname, 
+        email, 
+        profile_photo
+      })
+
+      res.status(200).json({
+        message: "success",
+        updatedUser
+      })
+  
+        } catch (err) {
+      res.send(err);
+    }
+  };
+
+
+// Method:       DELETE
+// Descrip:      Delete user info
+const deleteUser = async (req, res) => {
+    try {
+
+        await User.findByIdAndRemove(req.params.id)
+
+      res.status(200).json({
+        message: "successfully deleted",
+      })
+  
+        } catch (err) {
+
+      res.send(err);
+    }
+  };
+
+
 module.exports = {
   getUsersAll,
   getUserById,
   addUser,
+  updateUser,
+  deleteUser
 };
