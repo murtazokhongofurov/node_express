@@ -11,5 +11,7 @@ This project is the first one I'm working on using Express.js.
 ## Run the project
 ```
 node index.js
+```
+```
 npm run dev
 ```
